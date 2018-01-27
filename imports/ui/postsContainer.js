@@ -9,30 +9,30 @@ import Post from './post'
  * and passing the results to the child Post components for rendering
  */
 class Posts extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    let posts = <div></div>
+    if (this.props.data.posts && this.props.data.posts instanceof Array) {
+      posts = (
+        <div>
+          {this.props.data.posts.map(function(post) {
+            return <Post key={post.id} post={post} />;
+          })}
+        </div>
+      )
     }
-    render() {
-        let posts = <div></div>
-        if (this.props.data.posts && this.props.data.posts instanceof Array) {
-            posts = (
-                <div>
-                    {this.props.data.posts.map(function(post) {
-                        return <Post key={post.id} post={post} />;
-                    })}
-                </div>
-            )
-        }
 
-        return posts;
-    }
+    return posts;
+  }
 }
 
 // Posts requires props with a data attribute of an array of posts
 Posts.propTypes = {
-    data: PropTypes.shape({
-        posts: PropTypes.array
-    }).isRequired
+  data: PropTypes.shape({
+    posts: PropTypes.array
+  }).isRequired
 };
 
 // Define the graphql query to retrieve the posts and the desired attributes
@@ -48,5 +48,5 @@ const allPosts = gql`
 
 // Use the graphql container to run the allPosts query and pass the results to PostsContainer
 export default PostsContainer = graphql(allPosts, {
-    options: {pollInterval: 5000}
+  options: {pollInterval: 5000}
 })(Posts);

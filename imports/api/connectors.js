@@ -9,10 +9,10 @@ const db = new Sequelize('website', 'postgres', 'postgres', {
 
 // define the model
 const PostModel = db.define('post', {
-    content: { type: Sequelize.STRING },
-    views: {type: Sequelize.INTEGER}
+  content: { type: Sequelize.STRING },
+  views: {type: Sequelize.INTEGER}
 }, {
-    timestamps: false
+  timestamps: false
 });
 
 // create the table if it doesn't exist yet
